@@ -25,7 +25,7 @@ public class TestGetUserOrders {
   @DisplayName("Получение заказов авторизированного пользователя")
   @Test
   public void testSuccessfulUserOrdersWithAuth() {
-    TestRegisterUser.CreateUser();
+    TestRegisterUser.createUser();
     TestRegisterUser.getAccessToken();
     Order order = new Order(new String[]{"61c0c5a71d1f82001bdaaa6d", "609646e4dc916e00276b2870", "61c0c5a71d1f82001bdaaa72"});
     Response createOrderWithAuth = apiOrders.apiOrdersCreateOrderWithAuth(TestRegisterUser.accessToken, order);

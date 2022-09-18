@@ -46,7 +46,7 @@ public class TestCreateOrder {
   @DisplayName("Cоздание заказа под авторизованным пользователем")
   @Test
   public void testCreateOrderWithAuth() {
-    TestRegisterUser.CreateUser();
+    TestRegisterUser.createUser();
     TestRegisterUser.getAccessToken();
     Order order = new Order(new String[]{bun, ingredientSauce, ingredientFilling});
     Response createOrderWithAuth = apiOrders.apiOrdersCreateOrderWithAuth(TestRegisterUser.accessToken, order);

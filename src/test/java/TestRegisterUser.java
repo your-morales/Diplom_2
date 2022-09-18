@@ -52,12 +52,7 @@ public class TestRegisterUser {
   @DisplayName("Успешное создание пользователя, проверка кода успешного ответа и тела ответа об успешном создании пользователя")
   @Test
   public void testCreateUser() {
-    CreateUser();
-  }
-
-  @Step("Создание пользователя")
-  public static void CreateUser() {
-    Response createUser = apiAuthRegister.apiAuthRegister(userAccount);
+    Response createUser = createUser();
     createUser.then().statusCode(200).and().assertThat().body("success", equalTo(true))
             .and().assertThat().body("user.email", equalTo("guns1129111@yandex.ru"))
             .and().assertThat().body("user.name", equalTo("Andrey"));
@@ -66,11 +61,16 @@ public class TestRegisterUser {
   @DisplayName("Проверка создания пользователя, который уже зарегестрирован")
   @Test
   public void testErrorWhenCreateExistingUser() {
-    CreateUser();
+    createUser();
     Response errorWhenCreateExistingUser = apiAuthRegister.apiAuthRegister(userAccount);
     errorWhenCreateExistingUser.then().statusCode(403)
             .and().assertThat().body("success", equalTo(false))
             .and().assertThat().body("message", equalTo("User already exists"));
+  }
+
+  @Step("Создание пользователя")
+  public static Response createUser() {
+    return apiAuthRegister.apiAuthRegister(userAccount);
   }
 
   @DisplayName("Проверка создания пользователя без обязательного поля емейла")

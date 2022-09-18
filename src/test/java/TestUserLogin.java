@@ -10,7 +10,7 @@ public class TestUserLogin extends TestRegisterUser {
   @DisplayName("Успешный вход под созданным пользователем")
   @Test
   public void testSuccessfulLoginUser() {
-    CreateUser();
+    createUser();
     userLogin = new UserAccount("guns1129111@yandex.ru", "password123");
     Response loginUser = TestRegisterUser.apiAuthLogin.apiAuthLoginPost(userLogin);
     loginUser.then().statusCode(200).
@@ -22,7 +22,7 @@ public class TestUserLogin extends TestRegisterUser {
   @DisplayName("Проверка ошибка при некорректном вводе емейла при логине")
   @Test
   public void testSErrorWhenInvalidEmail() {
-    CreateUser();
+    createUser();
     userLogin = new UserAccount("guns1129111@yandex.ru1121", "password123");
     Response invalidEmail = TestRegisterUser.apiAuthLogin.apiAuthLoginPost(userLogin);
     invalidEmail.then().statusCode(401).
@@ -33,7 +33,7 @@ public class TestUserLogin extends TestRegisterUser {
   @DisplayName("Проверка ошибка при некорректном вводе пароля при авторизации")
   @Test
   public void testSErrorWhenInvalidPasword() {
-    CreateUser();
+    createUser();
     userLogin = new UserAccount("guns1129111@yandex.ru", "password123456");
     Response invalidPassword = TestRegisterUser.apiAuthLogin.apiAuthLoginPost(userLogin);
     invalidPassword.then().statusCode(401).
